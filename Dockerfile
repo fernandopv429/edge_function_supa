@@ -1,5 +1,6 @@
 # Usa a imagem oficial do Edge Runtime do Supabase
-FROM ghcr.io/supabase/edge-runtime:latest
+# Nota: O Supabase não publica a tag "latest", portanto devemos especificar uma versão exata.
+FROM supabase/edge-runtime:v1.74.2
 
 # Define o diretório de trabalho onde as funções ficarão
 WORKDIR /usr/services

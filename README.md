@@ -55,6 +55,16 @@ A partir de agora, a mágica do GitOps está ativa! Qualquer **`git push`** na b
 2. Fazer o Build de uma nova imagem Docker (usando o cache do Deno).
 3. Substituir o container antigo (Zero-Downtime Deployment).
 
+## 🐳 Como Atualizar o Supabase Edge Runtime
+
+O repositório do Supabase não utiliza a tag `latest` em suas imagens Docker para evitar quebras em produção. Por conta disso, fixamos uma versão específica (ex: `v1.74.2`) no `Dockerfile`.
+
+Para atualizar a versão do Edge Runtime no futuro:
+1. Verifique as novas versões disponíveis no [repositório oficial do Supabase Edge Runtime no GitHub](https://github.com/supabase/edge-runtime/releases).
+2. Atualize a primeira linha do seu `Dockerfile`:
+   `FROM supabase/edge-runtime:vX.Y.Z`
+3. Faça o commit e o push das alterações. O Coolify realizará um novo build com a versão mais recente.
+
 ## ➕ Como Adicionar Novas Funções
 
 Pensando no futuro (ex: `send-email`, `ai-agent`):
