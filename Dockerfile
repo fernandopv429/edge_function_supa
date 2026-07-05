@@ -26,7 +26,7 @@ EXPOSE 9999
 
 # HEALTHCHECK para garantir que o container reinicie caso a função trave
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
-  CMD curl -f http://127.0.0.1:9999/ || exit 1
+  CMD curl --max-time 2 -s -o /dev/null http://127.0.0.1:9999/ || exit 1
 
 # Comando de inicialização solicitado
 # Caso a imagem seja utilizada para múltiplas funções com um roteador dinâmico, o Edge Runtime
