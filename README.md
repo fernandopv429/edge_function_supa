@@ -44,7 +44,7 @@ Todo o processo é automatizado. Sem SCP, sem volumes, sem cópias manuais.
 1. No painel do Coolify, vá em **Create New Resource** > **Application** > **GitHub/GitLab/Git** (repositório público ou privado).
 2. Selecione o repositório e a branch (ex: `main`) onde este código está hospedado.
 3. Na seção **Build Pack**, escolha **Dockerfile**.
-4. Em **Port**, defina `8080`.
+4. Em **Port**, defina `9999`.
 5. Em **Environment Variables**, adicione as variáveis de ambiente necessárias:
    - `WHATSAPP_VERIFY_TOKEN=meu_token_secreto`
    - `FUNCTION_NAME=whatsapp-webhook` (se for outra função, altere o valor).
@@ -90,7 +90,7 @@ Recomenda-se utilizar **Semantic Versioning (SemVer)** e estratégias de Branchi
 ## 🛡️ Sugestões de Arquitetura e Produção
 
 * **Observabilidade e Logs:** O `console.log` nativo do Deno é capturado pelo daemon do Docker. No Coolify, os logs estarão visíveis instantaneamente na aba de logs da aplicação. Para produção em larga escala, considere enviar logs estruturados (JSON) para o Datadog, Axiom ou Better Stack diretamente de dentro da sua função, interceptando as requisições, ou configurando o driver de log do Docker do host.
-* **Rollback:** Se uma nova versão falhar (o HEALTHCHECK no Dockerfile garante que o tráfego só será roteado se a porta 8080 responder com sucesso), o Rollback no Coolify é feito acessando o painel de deploys (aba Deployments) e clicando em "Redeploy" na versão anterior com sucesso. Como alternativa via código, basta fazer um `git revert` do commit defeituoso e dar push.
+* **Rollback:** Se uma nova versão falhar (o HEALTHCHECK no Dockerfile garante que o tráfego só será roteado se a porta 9999 responder com sucesso), o Rollback no Coolify é feito acessando o painel de deploys (aba Deployments) e clicando em "Redeploy" na versão anterior com sucesso. Como alternativa via código, basta fazer um `git revert` do commit defeituoso e dar push.
 * **Organização dos Diretórios:** Conforme suas funções crescem, crie uma pasta `/shared` na raiz (ex: `/shared/supabase-client.ts`, `/shared/cors.ts`). O Deno permite importar funções locais facilmente (`import { corsHeaders } from "../shared/cors.ts"`).
 * **Segurança:** 
   * Nunca versione o arquivo `.env` no Git. Configure os secrets sempre via painel do Coolify.

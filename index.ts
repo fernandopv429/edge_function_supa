@@ -18,7 +18,7 @@ console.log(`🚀 Iniciando a Supabase Edge Function: ${functionName}`);
 
 try {
   // Importa dinamicamente a função desejada.
-  // Como o código do usuário já chama serve(), isso iniciará o servidor na porta 8080.
+  // Como o código do usuário já chama serve(), isso iniciará o servidor na porta 9999 (padrão do Edge Runtime).
   await import(`./${functionName}/index.ts`);
 } catch (error) {
   console.error(`❌ Erro ao iniciar a função '${functionName}':`);
